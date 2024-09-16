@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Sampel;
+use Barryvdh\DomPDF\PDF as DomPDF;
 use Illuminate\Http\Request;
 
 class SampelController extends Controller
 {
+    protected $pdf;
     /**
      * Display a listing of the resource.
      */
@@ -96,5 +98,17 @@ class SampelController extends Controller
         $sampel->delete();
 
         return redirect()->route('sampel.index')->with('success', 'Sampel berhasil dihapus.');
+    }
+
+    public function __construct(DomPDF $pdf)
+    {
+        $this->pdf = $pdf;
+    }
+
+    public function print($id)
+    {
+        $sampel = Sampel::findOrFail($id);
+        $pdf = $this->pdf->loadView('sampel.print', compact('sampel'));
+        return $pdf->download('sampel_'.$sampel->kode_sampel.'.pdf');
     }
 }

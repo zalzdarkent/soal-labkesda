@@ -103,6 +103,12 @@
                                                     @method('DELETE')
                                                 </form>
                                             </li>
+                                            <li>
+                                                <a class="dropdown-item d-flex align-items-center gap-3"
+                                                    href="{{ route('sampel.print', $item->id) }}">
+                                                    <i class="fs-4 ti ti-printer"></i>Print PDF
+                                                </a>
+                                            </li>
                                         </ul>
                                     </div>
                                 </td>

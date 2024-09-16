@@ -24,4 +24,5 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 Route::middleware('auth')->group(function () {
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
     Route::resource('sampel', SampelController::class);
+    Route::get('/sampel/{id}/print', [SampelController::class, 'print'])->name('sampel.print');
 });
