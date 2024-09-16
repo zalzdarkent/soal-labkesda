@@ -3,15 +3,21 @@
 @section('title', 'Daftar Sampel')
 
 @section('container')
-<style>
-    .text-bg-darah {
-        background-color: red
-    }
-</style>
+    <style>
+        .text-bg-darah {
+            background-color: red
+        }
+    </style>
     <div class="card w-100 position-relative overflow-hidden">
         <div class="px-4 py-3 border-bottom">
             <h4 class="card-title mb-0">Daftar Sampel</h4>
         </div>
+        @if (session('success'))
+            <div class="alert alert-success alert-dismissible fade show m-4" role="alert">
+                {{ session('success') }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        @endif
         <div class="card-body p-4">
             <div class="table-responsive mb-4 border rounded-1">
                 <table class="table text-nowrap mb-0 align-middle">
@@ -60,7 +66,8 @@
                                 </td>
                                 <td>
                                     @if ($item->status_sampel == 'Belum Diuji')
-                                        <span class="badge bg-warning-subtle text-warning" style="font-weight: 700">Belum Diuji</span>
+                                        <span class="badge bg-warning-subtle text-warning" style="font-weight: 700">Belum
+                                            Diuji</span>
                                     @elseif($item->status_sampel == 'Sedang Diuji')
                                         <span class="badge bg-primary-subtle text-primary">Sedang Diuji</span>
                                     @else
