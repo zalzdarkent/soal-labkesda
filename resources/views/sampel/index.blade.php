@@ -5,7 +5,7 @@
 @section('container')
     <style>
         .text-bg-darah {
-            background-color: red
+            background-color: red;
         }
     </style>
     <div class="card w-100 position-relative overflow-hidden">
@@ -40,6 +40,9 @@
                             </th>
                             <th>
                                 <h6 class="fs-4 fw-semibold mb-0">Lokasi Penyimpanan</h6>
+                            </th>
+                            <th>
+                                <h6 class="fs-4 fw-semibold mb-0">Opsi</h6>
                             </th>
                         </tr>
                     </thead>
@@ -92,8 +95,7 @@
                                             </li>
                                             <li>
                                                 <a class="dropdown-item d-flex align-items-center gap-3"
-                                                    href="javascript:void(0)"
-                                                    onclick="event.preventDefault(); document.getElementById('delete-form-{{ $item->id }}').submit();">
+                                                    href="javascript:void(0)" onclick="confirmDelete({{ $item->id }})">
                                                     <i class="fs-4 ti ti-trash"></i>Delete
                                                 </a>
                                                 <form id="delete-form-{{ $item->id }}"
@@ -119,4 +121,23 @@
             </div>
         </div>
     </div>
+
+    <script>
+        function confirmDelete(itemId) {
+            Swal.fire({
+                title: 'Apakah Anda yakin?',
+                text: 'Anda tidak dapat mengembalikan ini!',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#3085d6',
+                confirmButtonText: 'Ya, hapus!',
+                cancelButtonText: 'Batal'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    document.getElementById('delete-form-' + itemId).submit();
+                }
+            });
+        }
+    </script>
 @endsection

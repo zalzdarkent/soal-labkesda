@@ -34,12 +34,33 @@
                             <i class="ti ti-list-check fs-6"></i>
                             <p class="mb-0 fs-3">My Task</p>
                         </a>
-                        <form action="" method="post">
-                            <button class="btn btn-outline-primary mx-3 mt-2 d-block">Logout</button>
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                            @csrf
                         </form>
+                        
+                        <button onclick="confirmLogout()" class="btn btn-outline-primary mx-3 mt-2 d-block" type="button">Logout</button>                        
                     </div>
                 </div>
             </li>
         </ul>
     </div>
 </nav>
+
+<script>
+    function confirmLogout() {
+        Swal.fire({
+            title: 'Apakah Anda yakin ingin logout?',
+            text: 'Anda akan keluar dari akun ini!',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#3085d6',
+            confirmButtonText: 'Ya, logout!',
+            cancelButtonText: 'Batal'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                document.getElementById('logout-form').submit();
+            }
+        });
+    }
+</script>

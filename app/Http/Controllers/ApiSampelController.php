@@ -41,7 +41,12 @@ class ApiSampelController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $sampel = Sampel::find($id);
+        return response()->json([
+            'status'=> 200,
+            'message'=> 'Data ditemukan',
+            'data'=> $sampel
+        ]);
     }
 
     /**
